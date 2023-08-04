@@ -2,6 +2,7 @@
 import express from "express";
 import http from "http";
 
+//esta linea ...
 import { Server as SocketServer } from "socket.io";
 
 const app = express();
