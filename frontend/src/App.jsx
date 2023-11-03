@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import io from "socket.io-client";
 
 //comunicacion con el backend
@@ -10,7 +10,13 @@ const App = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    //enviar datos al backend
+    //evento 'mensaje' y valor 'mensaje' definido arriba en el usestate
+    socket.emit("Mensaje", Mensaje);
   };
+
+  useEffect(()=>{socket.on("Mensaje", Mensaje)=>{console.log(Mensaje)}})
 
   return (
     <div>
