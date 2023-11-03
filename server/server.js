@@ -1,9 +1,10 @@
 // :) asd
 import express from "express";
+import cors from 'cors'
+import { CorsOptions } from "cors";
 import http from "http";
-
-//esta linea ... asd1213
 import { Server as SocketServer } from "socket.io";
+import { Morgan } from "morgan";
 
 const app = express();
 const server = http.createServer(app);
