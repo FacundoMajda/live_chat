@@ -1,6 +1,6 @@
 # Chat en tiempo Real usando React y Socket.io
 
-Este proyecto es una aplicación web de chat en tiempo real que utiliza React para el frontend y Socket.io para habilitar la comunicación en tiempo real entre múltiples clientes y un servidor Node.js mediante Express.js. Además, para estilizar la aplicación frontend, se emplea TailwindCSS.
+Este proyecto es una aplicación web de chat en tiempo real que utiliza React para el frontend y Socket.io para habilitar la comunicación en tiempo real entre múltiples clientes y un servidor Node.js mediante Express.js.
 
 ## Herramientas
 
@@ -8,7 +8,6 @@ Este proyecto es una aplicación web de chat en tiempo real que utiliza React pa
 - express
 - socket.io
 - React
-- TailwindCSS
 
 ## Instalación
 
