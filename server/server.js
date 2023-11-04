@@ -10,7 +10,7 @@ import http from "http";
 import morgan from "morgan";
 import cors from "cors";
 
-import { Logger } from "./src/loaders/logger.js";
+import Logger from "./src/loaders/logger.js";
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -58,7 +58,6 @@ app.get("/socket.io", (req, res) => {});
 // Logger.info("Este es un mensaje de información.");
 // Logger.error("Este es un mensaje de error.");
 server.listen(PORT, () => {
-
   Logger.info(`Servidor en ejecución en: `);
 
   Logger.http(`http://localhost:${PORT}`);

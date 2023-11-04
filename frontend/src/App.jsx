@@ -1,10 +1,15 @@
+//se utiliza fontawesome para svg ! del parrafo de 'error'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
+
 import { useState, useEffect } from "react";
 import io from "socket.io-client";
-
+import "./App.css";
 // Comunicación con el backend
-// Configurado previamente en 'vite.config.js' 
+// Configurado previamente en 'vite.config.js'
 const socket = io("/");
 
+//ciclo de vida de un componente
 const App = () => {
   const [Mensaje, setMensaje] = useState("");
   const [Mensajes, setMensajes] = useState([]);
@@ -29,8 +34,10 @@ const App = () => {
   };
 
   useEffect(() => {
+    // Escuchar el evento 'Mensaje' del backend
     socket.on("Mensaje", (Mensaje) => {
       console.log(Mensaje);
+      // Agregar el nuevo mensaje al estado de mensajes
       setMensajes([...Mensajes, Mensaje]);
     });
 
@@ -53,7 +60,9 @@ const App = () => {
   }, [Mensajes]);
 
   return (
-    <div>
+    <div className="container">
+      <h1>Live Chat!</h1>
+
       <form onSubmit={handleSubmit} action="">
         <input
           type="text"
@@ -61,16 +70,23 @@ const App = () => {
           value={Mensaje}
           onChange={(e) => setMensaje(e.target.value)}
         />
-        <button>Enviar</button>
+        <button type="submit">Enviar</button>
       </form>
-
-      {Error && <p>{Error}</p>}
 
       <ul>
         {Mensajes.map((Mensaje, index) => (
           <li key={index}>{Mensaje}</li>
         ))}
       </ul>
+
+      {Error && (
+        <div className="errors">
+          <p>
+            {Error}
+            <FontAwesomeIcon icon={faExclamationCircle} />
+          </p>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,7 +1,7 @@
 {
   "name": "chatsocketioreact",
   "version": "1.0.0",
-  "description": "Este proyecto es una aplicación web de chat en tiempo real que utiliza React para el frontend y Socket.io para habilitar la comunicación en tiempo real entre múltiples clientes y un servidor Node.js mediante Express.js.",
+  "description": "asd",
   "main": "index.js",
   "type": "module",
   "scripts": {

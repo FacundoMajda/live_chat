@@ -21,7 +21,7 @@ Este proyecto es una aplicación web de chat en tiempo real que utiliza React pa
 
 1. Ejecuta el servidor:
 
-El servidor estará disponible en `http://localhost:3000` (o el puerto que hayas configurado).
+El servidor estará disponible en `http://localhost:8080` (o el puerto que hayas configurado).
 
 ## Estructura del proyecto
 
