@@ -34,30 +34,29 @@ const App = () => {
   };
 
   useEffect(() => {
-    // Escuchar el evento 'Mensaje' del backend
-    socket.on("Mensaje", (Mensaje) => {
-      console.log(Mensaje);
-      // Agregar el nuevo mensaje al estado de mensajes
-      setMensajes([...Mensajes, Mensaje]);
-    });
-
-    // Manejar errores de conexión con el backend
-    socket.on("connect_error", (error) => {
-      setError("Error de conexión con el servidor");
-    });
-
-    // Limpiar el estado de error cuando se establece la conexión con el backend
-    socket.on("connect", () => {
-      setError("");
-    });
-
-    // Limpiar los listeners cuando el componente se desmonta
-    return () => {
-      socket.off("Mensaje");
-      socket.off("connect_error");
-      socket.off("connect");
+    const handleMensaje = (mensaje) => {
+      console.log(mensaje);
+      setMensajes((mensajes) => [...mensajes, mensaje]);
     };
-  }, [Mensajes]);
+
+    const handleConnectError = (error) => {
+      setError("Error de conexión con el servidor");
+    };
+
+    const handleConnect = () => {
+      setError("");
+    };
+
+    socket.on("Mensaje", handleMensaje);
+    socket.on("connect_error", handleConnectError);
+    socket.on("connect", handleConnect);
+//dismount
+    return () => {
+      socket.off("Mensaje", handleMensaje);
+      socket.off("connect_error", handleConnectError);
+      socket.off("connect", handleConnect);
+    };
+  }, []);
 
   return (
     <div className="container">

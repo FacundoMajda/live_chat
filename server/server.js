@@ -14,6 +14,7 @@ import Logger from "./src/loaders/logger.js";
 
 const PORT = process.env.PORT || 8080;
 const app = express();
+
 //servidor http
 const server = http.createServer(app);
 //servidor websocket
@@ -27,20 +28,19 @@ const io = new SocketServer(server, {
 //cuando pase una conexion:
 io.on("connection", (socket) => {
   // console.log("Cliente conectado");
-  Logger.info("Cliente conectado"),
-    () => {
-      console.log("Cliente conectado");
-    };
+  Logger.info("Cliente conectado");
+
   //cuando escuchemos el siguiente evento
   //'mensaje'.
   //vamos a recibir datos del frontend y vamos a mostrarlos (en el backend)
   //'data' es un mensaje
+
+  // Manejo del evento "Mensaje"
   socket.on("Mensaje", (data) => {
-    //primer evento mensaje
-    Logger.info("Data: ", data),
-      () => {
-        console.log(data);
-      };
+    // Primer evento "Mensaje": recibir datos del frontend y mostrarlos en el backend
+    Logger.info("Data: ", data);
+    console.log(data);
+
     //una vez tenemos el mensaje, podemos enviar un nuevo mensaje
     //además el socket que se ha comunicado/enviado el msj
     //este va a emitir un evento mensaje a todos los clientes conectados
@@ -52,8 +52,21 @@ io.on("connection", (socket) => {
   });
 });
 
-app.get("/socket.io", (req, res) => {});
+//Middlewares
+app.use(cors());
+app.use(morgan("dev"));
 
+// Ruta de prueba
+app.get("/", (req, res) => {
+  res.send("¡Hola, mundo!");
+});
+
+// Manejo de errores
+app.use((err, req, res, next) => {
+  // Registrar el error en el logger
+  Logger.error(err.stack);
+  res.status(500).send("Error interno del servidor");
+});
 //test
 // Logger.info("Este es un mensaje de información.");
 // Logger.error("Este es un mensaje de error.");
@@ -61,5 +74,7 @@ server.listen(PORT, () => {
   Logger.info(`Servidor en ejecución en: `);
 
   Logger.http(`http://localhost:${PORT}`);
+  
+  //TODO: Conectar a la base de datos MongoDB
   // connectToMongoDB();
 });
